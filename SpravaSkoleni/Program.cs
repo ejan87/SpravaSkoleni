@@ -46,23 +46,23 @@
                                     {
                                         case 1:
                                             // Zde zavolat metodu
-                                            // spravaSkoleni.PrihlasitStudenta(vybraneSkoleni)
+                                            spravaSkoleni.PrihlasitStudenta(vybraneSkoleni);
                                             break;
                                         case 2:
                                             // Zde zavolat metodu
-                                            // spravaSkoleni.OdhlasitStudenta(vybraneSkoleni)
+                                            spravaSkoleni.OdhlasitStudenta(vybraneSkoleni);
                                             break;
                                         case 3:
                                             // Zde zavolat metodu
-                                            // spravaSkoleni.PriraditLektora(vybraneSkoleni)
+                                            spravaSkoleni.PriraditLektora(vybraneSkoleni);
                                             break;
                                         case 4:
                                             // Zde zavolat metodu
-                                            // spravaSkoleni.OdebratLektora(vybraneSkoleni)
+                                            spravaSkoleni.OdebratLektora(vybraneSkoleni);
                                             break;
                                         case 5:
                                             // Zde zavolat metodu
-                                            // spravaSkoleni.UzavritSkoleni(vybraneSkoleni)
+                                            spravaSkoleni.UzavritSkoleni(vybraneSkoleni);
                                             break;
                                     }
                                 }

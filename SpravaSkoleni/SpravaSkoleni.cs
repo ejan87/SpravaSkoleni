@@ -327,5 +327,111 @@ namespace SpravaSkoleni
                
             }
         }
+
+        public void PrihlasitStudenta(Skoleni skoleni)
+        {
+            // Vytvoříme si seznam studentů, kteří ještě nejsou na školení přihlášeni a mohou se tedy přihlásit
+            List<Student> studenti = new List<Student>();
+            foreach (Student student in Studenti)
+            {
+                if (!skoleni.Studenti.Contains(student))
+                {
+                    studenti.Add(student);
+                }
+            }
+
+            Console.WriteLine("*** Přihlášení studenta na školení ***");
+            // Zobrazíme seznam studentů, které je možné přihlásit a necháme uživatele vybrat studenta k přihlášení
+            for (int i = 0; i < studenti.Count; i++)
+            {
+                Console.WriteLine("{0}. {1} {2} - {3}", i + 1, studenti[i].Jmeno, studenti[i].Prijmeni, studenti[i].Kod);
+            }
+
+            Console.WriteLine("0. Zpět");
+            Console.Write("Přihlásit studenta: ");
+            int volba = int.Parse(Console.ReadLine()) - 1;
+            if (volba >= 0 && volba < studenti.Count)
+            {
+                skoleni.Studenti.Add(studenti[volba]);
+                UlozitSkoleni();
+                Console.WriteLine("Student byl úspěšně přihlášen na školení!");
+            }
+
+        }
+        public void OdhlasitStudenta(Skoleni skoleni)
+        {
+            
+            Console.WriteLine("*** Odhlášení studenta ze školení ***");
+            // Zobrazíme seznam studentů, kteří jsou na školení přihlášeni
+            for (int i = 0; i < skoleni.Studenti.Count; i++)
+            {
+                Console.WriteLine("{0}. {1} {2} - {3}", i + 1, skoleni.Studenti[i].Jmeno, skoleni.Studenti[i].Prijmeni, skoleni.Studenti[i].Kod);
+            }
+            Console.WriteLine("0. Zpět");
+            Console.Write("Odhlásit studenta: ");
+            int volba = int.Parse(Console.ReadLine()) - 1;
+            if (volba >= 0 && volba < skoleni.Studenti.Count)
+            {
+                skoleni.Studenti.Remove(skoleni.Studenti[volba]);
+                UlozitSkoleni();
+                Console.WriteLine("Student byl úspěšně odhlášen ze školení");
+            }
+        }
+        public void PriraditLektora(Skoleni skoleni)
+        {
+            List<Lektor> lektori = new List<Lektor>();
+            foreach (Lektor lektor in Lektori)
+            {
+                if (!skoleni.Lektori.Contains(lektor))
+                {
+                    lektori.Add(lektor);
+                }
+            }
+            Console.WriteLine("*** Přiřazení lektora na školení ***");
+            for (int i = 0; i < lektori.Count; i++)
+            {
+                Console.WriteLine("{0}. {1} {2} - {3}", i + 1, lektori[i].Jmeno, lektori[i].Prijmeni, lektori[i].Kod);
+            }
+            Console.WriteLine("0. Zpět");
+            Console.Write("Přiřadit lektora: ");
+            int volba = int.Parse(Console.ReadLine()) - 1;
+            if (volba >= 0 && volba < lektori.Count)
+            {
+                skoleni.Lektori.Add(lektori[volba]);
+                UlozitSkoleni();
+                Console.WriteLine("Lektor byl úspěšně přiřazen ke školení!");
+            }
+        }
+        public void OdebratLektora(Skoleni skoleni)
+        {
+            Console.WriteLine("*** Odebrat lektora ze školení ***");
+            for (int i = 0; i < skoleni.Lektori.Count; i++)
+            {
+                Console.WriteLine("{0}. {1} {2} - {3}", i + 1, skoleni.Lektori[i].Jmeno, skoleni.Lektori[i].Prijmeni, skoleni.Lektori[i].Kod);
+            }
+            Console.WriteLine("0. Zpět");
+            Console.Write("Odebrat lektora: ");
+            int volba = int.Parse(Console.ReadLine()) - 1;
+            if (volba >= 0 && volba < skoleni.Lektori.Count)
+            {
+                skoleni.Lektori.Remove(skoleni.Lektori[volba]);
+                UlozitSkoleni();
+                Console.WriteLine("Lektor byl úspěšně odebrán ze školení!");
+            }
+        }
+        public void UzavritSkoleni(Skoleni skoleni)
+        {
+            Console.WriteLine("*** Uzavřít školení ***");
+            Console.WriteLine("Vyplňte procentuální hodnocení studentů školení.");
+            foreach (Student student in skoleni.Studenti)
+            {
+                Console.WriteLine("{0} {1} - ({2})", student.Jmeno, student.Prijmeni, student.Kod);
+                int hodnoceni = int.Parse(Console.ReadLine());
+                skoleni.HodnoceniStudentu[student] = hodnoceni;
+            }
+            skoleni.Uzavreno = true;
+            UlozitSkoleni();
+            Console.WriteLine("Hodnocení studentů úspěšně uloženo, školení uzavřeno!");
+        }
     }
 }
